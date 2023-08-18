@@ -45,7 +45,7 @@
     padding: 1px;
   }
 
-  .abc{
+  .container{
     display: flex;
     justify-content: center;
   }
