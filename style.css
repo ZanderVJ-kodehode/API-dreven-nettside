@@ -4,8 +4,12 @@
     padding: 0;
   }
   
+  /* changing the background to red on the body */
+  body{
+    background-color: rgb(210, 85, 85);
+  }
   
-
+/* changing the nav bar to be flex and then smal changes */
   .nav-bar{
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -15,7 +19,7 @@
     height: 100px;
   }
 
-
+/* changing the look of the input */
   #searchInput{
     border: none;
     color: black;
@@ -24,6 +28,7 @@
     font-size: 15px;
   }
 
+/* changing the look of the button */
   #searchButton{
     background-color: red; /* Green */
     border: none;
@@ -34,23 +39,28 @@
     display: inline-block;
     font-size: 15px;
   }
+
+  /* changing the hover efect the button */
   #searchButton:hover{
     background-color: rgb(198, 6, 6);
     cursor: pointer;
   }
   
+  /* changing the container wher the pokemons will be */
   .grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
     padding: 1px;
   }
 
+/* changing the pokemon container to be centerd */
   .container{
     display: flex;
     justify-content: center;
   }
   
   .pokemon-card {
+    /* changin how the look of the pokemon card will look like */
     background-color: rgba(208, 205, 205, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 5px;
@@ -59,18 +69,23 @@
     /* height: 200px; */
   }
   
+
+  /* changing how the image will be inside the pokemon card */
   .pokemon-card img {
     width: 100px;
   }
 
+  /* changing the hover effect of the pokemon-card hover efect */
   .pokemon-card:hover{
     background-color: blanchedalmond;
   }
   
+  /* changingin the margin- top of the h2 */
   .h2 {
     margin-top: 0;
   }
   
+  /* changing the margin-bottom of the p */
   .p {
     margin-bottom: 0;
   }
