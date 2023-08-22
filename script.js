@@ -20,16 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
     getPokemon("");
   
     // This event listener responds to a click on the search button.
-    searchButton.addEventListener("click", () => {
+    searchButton.addEventListener("click", async () => {
 
       // Making the search input field and make it to lowercase.
       const searchTerm = searchInput.value.toLowerCase();
-      
+
+    
       // Clear the previous search results.
       resultContainer.innerHTML = "";
       
       // Reset the count of displayed Pokémon.
-      displayedPokemonCount = 0;
+      displayedPokemonCount = 1;
       
       // Fetch and displaying Pokémons that fit my search.
       getPokemon(searchTerm);
@@ -47,73 +48,243 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   
-    // This function fetches and displays Pokémon based on the given search term.
-    function getPokemon(searchTerm) {
-      fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json(); // Convert the response to JSON format, to make it easier to read and work whit.
-        })
-        .then(data => {
-          const pokemonList = data.results; // Extracting the list of Pokémon.
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ///////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////
+// // removing the .map... maybe
+// ///////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////
+
+
+//     // This function fetches and displays Pokémon based on the given search term.
+//     function getPokemon(searchTerm) {
+//       fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+//         .then(response => {
+//           if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//           }
+//           return response.json(); // Convert the response to JSON format, to make it easier to read and work whit.
+//         })
+//         .then(data => {
+//           const pokemonList = data.results; // Extracting the list of Pokémon.
           
-          // Filter the Pokémon list based on name and number matching the search term.
-          const matchingPokemon = pokemonList.filter(pokemon => {
-            return (
-              pokemon.name.startsWith(searchTerm) ||
-              extractPokemonNumber(pokemon.url).startsWith(searchTerm)
-            );
-          });
+//           // Filter the Pokémon list based on name and number matching the search term.
+//           const matchingPokemon = pokemonList.filter(pokemon => {
+//             return (
+//               pokemon.name.startsWith(searchTerm) ||
+//               extractPokemonNumber(pokemon.url).startsWith(searchTerm)
+//             );
+//           });
   
-          // Determine how many Pokémon to display based on the search term, whits is as many as possible that maches my searth.
-          let displayCount = initialDisplayCount;
-          if (searchTerm) {
-            displayCount = matchingPokemon.length;
-          }
+//           // Determine how many Pokémon to display based on the search term, whits is as many as possible that maches my searth.
+//           let displayCount = initialDisplayCount;
+//           if (searchTerm) {
+//             displayCount = matchingPokemon.length;
+//           }
   
-          // Create promises for fetching and displaying Pokémon data.
-          const pokemonPromises = matchingPokemon.slice(0, displayCount).map(pokemon => {
-            return fetch(pokemon.url)
-              .then(response => response.json())
-              .then(pokemonData => {
-                // Extracting the information i want for each Pokémon whitch is number, name and what type it is but also the img.
-                const pokemonInfo = {
-                  number: extractPokemonNumber(pokemon.url),
-                  name: pokemonData.name,
-                  types: pokemonData.types.map(type => type.type.name),
-                  image: getImageUrl(extractPokemonNumber(pokemon.url))
-                };
+//           // Create promises for fetching and displaying Pokémon data.
+//           const pokemonPromises = matchingPokemon.slice(displayPokemonCard - 1, displayCount).map(pokemon => {
+//             return fetch(pokemon.url)
+//               .then(response => response.json())
+//               .then(pokemonData => {
+//                 // displayedPokemonCount++;
+//                 // Extracting the information i want for each Pokémon whitch is number, name and what type it is but also the img.
+//                 const pokemonInfo = {
+//                   number: extractPokemonNumber(pokemon.url),
+//                   name: pokemonData.name,
+//                   types: pokemonData.types.map(type => type.type.name),
+//                   image: getImageUrl(extractPokemonNumber(pokemon.url)),
+                  
+//                 };
   
-                // Displaying the Pokémons information on the page.
-                displayPokemonCard(pokemonInfo);
+//                 // Displaying the Pokémons information on the page.
+//                 displayPokemonCard(pokemonInfo);
                 
-                // Increment the count of displayed Pokémon.
-                // why its needed, from chat gpt.
-                // Why is it Needed:
-                // The purpose of this counter is to keep track of the number of Pokémon displayed so that you can implement certain features or behaviors based on the count. For example:
+                
+//                 // Increment the count of displayed Pokémon.
+//                 // why its needed, from chat gpt.
+//                 // Why is it Needed:
+//                 // The purpose of this counter is to keep track of the number of Pokémon displayed so that you can implement certain features or behaviors based on the count. For example:
 
-                // You might want to limit the number of Pokémon displayed initially or load more as the user scrolls down.
-                // You might want to show a message to the user once a certain number of Pokémon have been displayed, like "You've viewed 10 Pokémon. Keep exploring!"
-                // It could be used for analytics purposes to understand user engagement with the displayed content.
-                // In your specific code, the incremented count is not directly used, but it could be valuable if you plan to expand the functionality of your page in the future.
+//                 // You might want to limit the number of Pokémon displayed initially or load more as the user scrolls down.
+//                 // You might want to show a message to the user once a certain number of Pokémon have been displayed, like "You've viewed 10 Pokémon. Keep exploring!"
+//                 // It could be used for analytics purposes to understand user engagement with the displayed content.
+//                 // In your specific code, the incremented count is not directly used, but it could be valuable if you plan to expand the functionality of your page in the future.
 
-                // So, while the line itself might not have an immediate impact on the current code, it's a good practice to maintain a count of displayed items, as it might become useful in more complex scenarios or future updates.
-                displayedPokemonCount++;
-              });
-          });
+//                 // So, while the line itself might not have an immediate impact on the current code, it's a good practice to maintain a count of displayed items, as it might become useful in more complex scenarios or future updates.
+//                 displayedPokemonCount++;
+//               });
+//           });
   
-          // Execute all promises concurrently.
-          // not needed her but can be good to have on bigger prosjekts
-          // from chat gpt......In summary, the use of Promise.all helps improve the efficiency of fetching data concurrently, and the .catch block ensures that any errors are caught and logged, helping you identify and address potential issues.
-          Promise.all(pokemonPromises)
-            .catch(error => {
-              console.error("Fetch error:", error);
-            });
-        });
+//           // Execute all promises concurrently.
+//           // not needed her but can be good to have on bigger prosjekts
+//           // from chat gpt......In summary, the use of Promise.all helps improve the efficiency of fetching data concurrently, and the .catch block ensures that any errors are caught and logged, helping you identify and address potential issues.
+//           Promise.all(pokemonPromises)
+//             .catch(error => {
+//               console.error("Fetch error:", error);
+//             });
+//         });
+//     }
+  
+
+
+
+
+
+
+
+// ///////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////
+// making the searth/button better
+// ///////////////////////////////////////////////////////////////////
+// ///////////////////////////////////////////////////////////////////
+
+
+// This function fetches and displays Pokémon based on the given search term.
+async function getPokemon(searchTerm) {
+  try {
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  
+    const data = await response.json();
+
+    const pokemonList = data.results;
+
+    const matchingPokemon = pokemonList.filter(pokemon => {
+      return (
+        pokemon.name.startsWith(searchTerm) ||
+        extractPokemonNumber(pokemon.url).startsWith(searchTerm)
+      );
+    });
+
+    // Sort the matchingPokemon array by number.
+    matchingPokemon.sort((a, b) => {
+      const numberA = parseInt(extractPokemonNumber(a.url));
+      const numberB = parseInt(extractPokemonNumber(b.url));
+      return numberA - numberB;
+    });
+
+    let displayCount = initialDisplayCount;
+    if (searchTerm) {
+      displayCount = matchingPokemon.length;
+    }
+
+    // Clear the previous search results.
+    resultContainer.innerHTML = "";
+
+     // Display Pokémon from number 1 to the specified display count.
+     for (let i = 1; i <= displayCount; i++) {
+      const pokemon = matchingPokemon[i - 1];
+      const pokemonDataResponse = await fetch(pokemon.url);
+      const pokemonData = await pokemonDataResponse.json();
+      const pokemonInfo = {
+        number: extractPokemonNumber(pokemon.url),
+        name: pokemonData.name,
+        types: pokemonData.types.map(type => type.type.name),
+        image: getImageUrl(extractPokemonNumber(pokemon.url)),
+      };
+
+      displayPokemonCard(pokemonInfo);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     // This function generates the URL for a Pokémon's image using its number.
     function getImageUrl(pokemonNumber) {
       return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonNumber}.png`;
@@ -157,7 +328,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Append the card div to the result container.
       resultContainer.appendChild(cardDiv);
     }
-  
+
+
     // This function displays detailed information about the Pokémon.
     function displayPokemonInfo(pokemonInfo, detailsDiv) {
       // Clear previous details from the details div.
@@ -166,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Create elements for name, number, and types.
       const nameElement = document.createElement("h2");
       nameElement.textContent = pokemonInfo.name;
+      // nameElement.textContent = pokemonInfo.name.toUpperCase();
     
       const numberElement = document.createElement("p");
       numberElement.classList.add("number");
