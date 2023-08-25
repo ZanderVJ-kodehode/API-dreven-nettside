@@ -1,10 +1,11 @@
 
 // chat gpt have been uset for some coding i was stuck on.
 // some exsplanien is also made by chat gpt.
+// i also tride to make a local stogas byut i wasen abel to, i tride whit chat gpt and google.
+// from what i find out i wasen abel to do it becase of the api.
 
 
-
-// This event listener waits for the entire HTML document to load before executing the enclosed code.
+// Makes the html load in befor javascript does its thing.
 document.addEventListener("DOMContentLoaded", function () {
 
     // Selecting elements from the HTML so i can use them in javascript.
@@ -12,11 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchButton = document.getElementById("searchButton");
     const resultContainer = document.getElementById("resultContainer");
   
-    // Setting up variables to manage the display of Pokémon.... on is at 16 for the starter of the site. and the 0 + how many that mach my searth.
+    // making 1 for 16 to show and the other is at 0
     const initialDisplayCount = 16;
     let displayedPokemonCount = 0;
   
-    // making it so nothing is searthing when i stat the page(refrach).
+    // making it so nothing is eartshing when i stat the page(refrach).
     getPokemon("");
   
     // This event listener responds to a click on the search button.
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const searchTerm = searchInput.value.toLowerCase();
 
     
-      // Clear the previous search results.
+      // Clear the previous search results. so i dont get many pokemon of difrant name.
       resultContainer.innerHTML = "";
       
       // Reset the count of displayed Pokémon.
@@ -58,49 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ///////////////////////////////////////////////////////////////////
-// ///////////////////////////////////////////////////////////////////
-// // removing the .map... maybe
-// ///////////////////////////////////////////////////////////////////
-// ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+// This is what i made but then i dident get the numbers in order if i refrecht the site.
+///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 
 //     // This function fetches and displays Pokémon based on the given search term.
@@ -216,11 +179,12 @@ async function getPokemon(searchTerm) {
     if (searchTerm) {
       displayCount = matchingPokemon.length;
     }
+    
 
     // Clear the previous search results.
     resultContainer.innerHTML = "";
 
-     // Display Pokémon from number 1 to the specified display count.
+     // displaying the pokemon in order from number 1 and up.
      for (let i = 1; i <= displayCount; i++) {
       const pokemon = matchingPokemon[i - 1];
       const pokemonDataResponse = await fetch(pokemon.url);
@@ -238,36 +202,6 @@ async function getPokemon(searchTerm) {
     console.error("Error:", error);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -362,12 +296,6 @@ async function getPokemon(searchTerm) {
       }
     }
   });
-
-
-
-
-
-
 
 
 
